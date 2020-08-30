@@ -1,5 +1,21 @@
 import threading
+import traceback
 import telebot
+
+def live_forever(live_func):
+	def new_func():
+		count_logs = 0
+		max_count_logs = 1000
+		
+		while True:
+			try:
+				live_func()
+				break
+			except:
+				if count_logs < max_count_logs:
+					traceback.print_exc()
+					count_logs += 1
+	return new_func
 
 bot = telebot.TeleBot("1375711921:AAHkv6C1n2LO7_IJSKlZAWfE7gltlv4R5y4", parse_mode=None)
 
@@ -169,4 +185,10 @@ def handle_message(message):
 		start_stage_0(chat_id)
 	client_lock.release()
 
-bot.polling()
+
+@live_forever
+def main():
+	bot.polling()
+
+if __name__ == "__main__":
+	main()
