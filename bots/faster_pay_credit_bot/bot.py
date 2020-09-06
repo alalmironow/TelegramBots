@@ -17,7 +17,12 @@ def live_forever(live_func):
 					count_logs += 1
 	return new_func
 
-bot = telebot.TeleBot("1375711921:AAHkv6C1n2LO7_IJSKlZAWfE7gltlv4R5y4", parse_mode=None)
+while True:
+	try:
+		bot = telebot.TeleBot("1375711921:AAHkv6C1n2LO7_IJSKlZAWfE7gltlv4R5y4", parse_mode=None)
+		break
+	except:
+		pass
 
 HI_MESSAGE = "Привет! Я CreditBot. Я расскажу как быстро ты выплатишь кредит, если будешь платить чуть больше ежемесячного платежа!"
 ERROR_MESSAGE = "Укажи корректное значение, пожалуйста"
