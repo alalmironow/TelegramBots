@@ -1,1 +1,1 @@
-@reboot python3 /app/bots/faster_pay_credit_bot/bot.py
+@reboot python3  /app/daemon.py /app/bots/faster_pay_credit_bot/bot.py
