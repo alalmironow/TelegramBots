@@ -175,5 +175,4 @@ def main():
 	print("starting")
 	bot.polling()
 
-if __name__ == "__main__":
-	main()
+main()
