@@ -7,6 +7,7 @@ while True:
 	code = file.read()
 	file.close()
 	try:
+		print("Start " + sys.argv[1])
 		exec(code)
 	except:
 		traceback.print_exc()

@@ -7,27 +7,23 @@ RUN add-apt-repository ppa:jonathonf/ffmpeg-4
 RUN apt-get update
 RUN apt-get -y install libasound-dev portaudio19-dev libportaudio2 libportaudiocpp0
 RUN apt-get -y install ffmpeg
-RUN apt-get -y install cron
 RUN apt-get -y install python3.7 
 RUN apt-get -y install python3-pip
 
-RUN mkdir /app
-
 #Copy requirements Python3
-COPY requirements.txt /app/requirements.txt
-COPY daemon.py /app/daemon.py
+COPY requirements.txt /requirements.txt
+COPY daemon.py /daemon.py
 #Copy crontab file
-COPY crontab.txt /app/crontab.txt
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
 #Create bots dir
-RUN mkdir /app/bots
-COPY bots/ /app/bots
+RUN mkdir /bots
+COPY bots/ /bots
 
 #Pip install libs
-RUN pip3 install --no-cache-dir -r /app/requirements.txt
-# Apply cron job
-RUN crontab /app/crontab.txt
+RUN pip3 install --no-cache-dir -r /requirements.txt
 # Create the log file to be able to run tail
-RUN touch /var/log/cron.log
-
+RUN touch /var/log/telegram_bots.log
 # Run the command on container startup
-CMD cron && tail -f /var/log/cron.log
+
+CMD ./start.sh
