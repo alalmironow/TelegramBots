@@ -10,7 +10,7 @@ import threading
 import os
 
 LOCK = threading.Lock()
-API_KEY = "1354548437:AAESDxGqn1Sphfz0v1gxMzA-bDVs7RBdxDo"
+API_KEY = os.environ["API_TOKEN_2"]
 
 def convert_audio(old_file_name, new_file_name):
 	process = subprocess.run(['ffmpeg', '-i', old_file_name, new_file_name])
